@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mise x:*)",
+      "Bash(hugo:*)",
+      "Bash(hugo *)"
+    ]
+  }
+}

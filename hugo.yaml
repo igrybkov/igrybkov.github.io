@@ -1,0 +1,82 @@
+baseURL: https://grybkov.com/
+languageCode: en-us
+title: Illia Grybkov
+theme: ["PaperMod"]
+
+pagination:
+  pagerSize: 5
+
+params:
+  env: production
+  description: "Staff Software Engineer at Adobe. Writing about developer experience, lessons learned, and things I find interesting."
+  author: Illia Grybkov
+
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  ShowRssButtonInSectionTermList: true
+
+  homeInfoParams:
+    Title: "Hey, I'm Illia"
+    #imageUrl: "/photo.jpg"
+    imageUrl: "/avatar.png"
+    Content: >
+      Staff Software Engineer at Adobe, building backend systems at scale.
+      <br>I write about things that excite me — cool automations, lessons learned the hard way,
+      and projects worth sharing. Plus whatever catches my eye in tech and beyond.
+      <br>Hope you find something fun here!
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/igrybkov"
+    - name: linkedin
+      url: "https://linkedin.com/in/igrybkov"
+    # - name: x
+    #   url: "https://x.com/igrybkov"
+    - name: rss
+      url: "/index.xml"
+
+  cover:
+    hiddenInList: false
+    hiddenInSingle: false
+
+  assets:
+    disableHLJS: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: monokai
+    lineNos: false
+    noClasses: false
+
+menu:
+  main:
+    - identifier: posts
+      name: Posts
+      url: /posts/
+      weight: 10
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 30
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 40
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
