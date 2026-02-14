@@ -9,7 +9,7 @@ DOCKER_PW_RUN = docker run --rm -v "$(PWD):/work" -w /work \
 		curl -sL "https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/hugo_extended_$(HUGO_VERSION)_linux-$(HUGO_ARCH).tar.gz" \
 			| tar xz -C /usr/local/bin hugo \
 		&& npm ci \
-		&& PW_SERVER_CMD="hugo server --disableFastRender --buildDrafts --port 1313" \
+		&& PW_SERVER_CMD="hugo server --disableFastRender --buildDrafts --port 1313 --config hugo.yaml,hugo.test.yaml" \
 			npx playwright test tests/visual.spec.ts --update-snapshots'
 
 ## Install/update PaperMod Hugo theme
@@ -31,7 +31,7 @@ build:
 
 ## Start Hugo server for tests (headless, no browser)
 serve:
-	mise exec -- hugo server --disableFastRender --buildDrafts --port 1313
+	mise exec -- hugo server --disableFastRender --buildDrafts --port 1313 --config hugo.yaml,hugo.test.yaml
 
 ## Run all Playwright tests
 test:
@@ -42,7 +42,7 @@ test-visual:
 	npm run test:visual
 
 ## Regenerate screenshot baselines (macOS + Linux via Docker)
-test-update-screenshots:
+screenshots:
 	npm run test:update
 	$(DOCKER_PW_RUN)
 
