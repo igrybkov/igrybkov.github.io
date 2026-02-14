@@ -19,6 +19,7 @@ params:
   ShowCodeCopyButtons: true
   ShowToc: true
   ShowRssButtonInSectionTermList: true
+  comments: true
 
   homeInfoParams:
     Title: "Hey, I'm Illia"
