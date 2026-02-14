@@ -1,41 +1,45 @@
 # grybkov.com
 
-Personal website and blog — [grybkov.com](https://grybkov.com)
+[![Hugo](https://img.shields.io/badge/Hugo-FF4088?logo=hugo&logoColor=white)](https://gohugo.io/)
+[![Deploy](https://github.com/igrybkov/grybkov.com/actions/workflows/hugo.yml/badge.svg)](https://github.com/igrybkov/grybkov.com/actions/workflows/hugo.yml)
 
-Built with [Hugo](https://gohugo.io/) and the [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme, deployed to GitHub Pages.
+Source for my personal site and blog at **[grybkov.com](https://grybkov.com)**.
 
-## Prerequisites
+I write about developer experience, lessons learned the hard way, cool automations, and whatever else catches my eye in tech and beyond. Built with [Hugo](https://gohugo.io/) and the [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme.
 
-- [mise](https://mise.jdx.dev/) — manages the Hugo version automatically via `mise.toml`
+## Running Locally
 
-## Local Development
-
-Start a dev server with live reload (includes drafts):
+You'll need [mise](https://mise.jdx.dev/) installed — it picks up the right Hugo version automatically from `mise.toml`.
 
 ```sh
+# Dev server with live reload (drafts included)
 make watch
-```
 
-To preview only published posts:
-
-```sh
+# Same thing, but only published posts
 make watch-published
 ```
 
-## Build
+## Project Structure
 
-```sh
-make build
+```
+content/        Posts and pages (Markdown)
+layouts/        Template overrides on top of PaperMod
+static/         Images, favicons, and other static assets
+hugo.yaml       Site configuration
+Makefile        Build/dev/theme commands
 ```
 
-Output goes to `./public`.
+## Deployment
 
-## Deploy
+Every push to `main` triggers a [GitHub Actions workflow](.github/workflows/hugo.yml) that builds the site and deploys it to GitHub Pages. Nothing to do manually.
 
-Pushing to the `main` branch triggers the GitHub Actions workflow (`.github/workflows/hugo.yml`) which builds the site and deploys it to GitHub Pages.
-
-## Update Theme
+## Other Commands
 
 ```sh
-make update-theme
+make build          # Production build → ./public
+make update-theme   # Pull the latest PaperMod
 ```
+
+## License
+
+Content and code in this repo are my own. The [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme is MIT-licensed.
