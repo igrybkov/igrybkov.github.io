@@ -1,23 +1,18 @@
 {{- with site.Params.homeInfoParams }}
 <article class="first-entry home-info">
-    <div style="display: flex; align-items: flex-start; gap: 2rem;">
-        <div style="flex: 1;">
-            <header class="entry-header">
-                <h1 style="margin-bottom: 0.3rem; font-size: 42px;">{{ .Title | markdownify }}</h1>
-            </header>
-            <div class="entry-content">
-                {{ .Content | markdownify }}
-            </div>
+    {{- with site.Params.homeInfoParams.imageUrl }}
+    <div class="home-avatar">
+        <img src="{{ . }}" alt="{{ site.Params.author }}" />
+        <div class="home-social">
+            {{ partial "social_icons.html" (dict "align" "center") }}
         </div>
-        {{- with site.Params.homeInfoParams.imageUrl }}
-        <div style="flex-shrink: 0; text-align: center;">
-            <img src="{{ . }}" alt="{{ site.Params.author }}"
-                style="border-radius: 50%; width: 160px; height: 160px; object-fit: cover;" />
-            <div style="margin-top: 0.3rem;">
-                {{ partial "social_icons.html" (dict "align" "center") }}
-            </div>
-        </div>
-        {{- end }}
+    </div>
+    {{- end }}
+    <header class="entry-header">
+        <h1 style="margin-bottom: 0.3rem; font-size: 42px;">{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content">
+        {{ .Content | markdownify }}
     </div>
 </article>
 {{- end -}}
