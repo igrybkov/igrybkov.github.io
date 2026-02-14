@@ -88,6 +88,11 @@
             {{- if and (not $hasPosts) (in $postDependentMenus .Identifier) }}
             {{- continue }}
             {{- end }}
+            {{- /* Hide menu items linking to draft pages or empty sections */ -}}
+            {{- $menuPage := site.GetPage (strings.TrimSuffix "/" .URL) }}
+            {{- if not $menuPage }}{{ continue }}{{ end }}
+            {{- if $menuPage.Draft }}{{ continue }}{{ end }}
+            {{- if and $menuPage.IsSection (eq (len $menuPage.RegularPages) 0) }}{{ continue }}{{ end }}
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
             {{- $page_url:= $currentPage.Permalink | absLangURL }}
             {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
