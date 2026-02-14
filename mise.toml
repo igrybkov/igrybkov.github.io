@@ -1,2 +1,3 @@
 [tools]
 hugo = "latest"
+node = "22.22.0"
