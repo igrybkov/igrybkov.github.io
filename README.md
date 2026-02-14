@@ -1,7 +1,7 @@
 # grybkov.com
 
 [![Hugo](https://img.shields.io/badge/Hugo-FF4088?logo=hugo&logoColor=white)](https://gohugo.io/)
-[![Deploy](https://github.com/igrybkov/grybkov.com/actions/workflows/hugo.yml/badge.svg)](https://github.com/igrybkov/grybkov.com/actions/workflows/hugo.yml)
+[![Deploy](https://github.com/igrybkov/igrybkov.github.io/actions/workflows/hugo.yml/badge.svg)](https://github.com/igrybkov/igrybkov.github.io/actions/workflows/hugo.yml)
 
 Source for my personal site and blog at **[grybkov.com](https://grybkov.com)**.
 
