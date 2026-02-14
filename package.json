@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:visual": "playwright test tests/visual.spec.ts",
+    "test:a11y": "playwright test tests/accessibility.spec.ts",
+    "test:links": "playwright test tests/links.spec.ts",
+    "test:update": "playwright test --update-snapshots"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "^1.49.0"
+  }
+}
