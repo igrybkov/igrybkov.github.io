@@ -2,7 +2,15 @@ PLAYWRIGHT_VERSION := $(shell node -e "console.log(require('@playwright/test/pac
 HUGO_VERSION := $(shell mise exec -- hugo version 2>/dev/null | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | sed 's/^v//' || echo "0.155.3")
 HUGO_ARCH := $(if $(filter arm64 aarch64,$(shell uname -m)),arm64,amd64)
 
-.PHONY: update-theme watch watch-published build serve test test-visual test-update-screenshots test-update-screenshots-linux test-install
+.PHONY: update-theme watch watch-published build serve test test-visual test-update-screenshots test-install
+DOCKER_PW_RUN = docker run --rm -v "$(PWD):/work" -w /work \
+	mcr.microsoft.com/playwright:v$(PLAYWRIGHT_VERSION)-noble \
+	bash -c '\
+		curl -sL "https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/hugo_extended_$(HUGO_VERSION)_linux-$(HUGO_ARCH).tar.gz" \
+			| tar xz -C /usr/local/bin hugo \
+		&& npm ci \
+		&& PW_SERVER_CMD="hugo server --disableFastRender --buildDrafts --port 1313" \
+			npx playwright test tests/visual.spec.ts --update-snapshots'
 
 ## Install/update PaperMod Hugo theme
 update-theme:
@@ -33,22 +41,12 @@ test:
 test-visual:
 	npm run test:visual
 
-## Regenerate screenshot baselines
+## Regenerate screenshot baselines (macOS + Linux via Docker)
 test-update-screenshots:
 	npm run test:update
+	$(DOCKER_PW_RUN)
 
 ## Install test dependencies and Chromium
 test-install:
 	npm install
 	npx playwright install chromium
-
-## Regenerate Linux screenshot baselines via Docker (for CI)
-test-update-screenshots-linux:
-	docker run --rm -v "$(PWD):/work" -w /work \
-		mcr.microsoft.com/playwright:v$(PLAYWRIGHT_VERSION)-noble \
-		bash -c '\
-			curl -sL "https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/hugo_extended_$(HUGO_VERSION)_linux-$(HUGO_ARCH).tar.gz" \
-				| tar xz -C /usr/local/bin hugo \
-			&& npm ci \
-			&& PW_SERVER_CMD="hugo server --disableFastRender --buildDrafts --port 1313" \
-				npx playwright test tests/visual.spec.ts --update-snapshots'
