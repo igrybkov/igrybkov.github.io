@@ -21,7 +21,7 @@ make test-install      # Install npm deps + Chromium
 make screenshots       # Regenerate snapshot baselines (macOS locally + Linux via Docker)
 ```
 
-Hugo and Node are both managed via [mise](https://mise.jdx.dev/) (`mise.toml` pins `hugo = "latest"`, `node = "22.22.0"`). All `make` targets run Hugo through `mise exec`.
+Hugo and Node are both managed via [mise](https://mise.jdx.dev/) (`mise.toml` pins `hugo = "0.170.1"`, `node = "26.13.1"`). All `make` targets run Hugo through `mise exec`.
 
 ### Testing
 
