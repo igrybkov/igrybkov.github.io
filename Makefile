@@ -2,7 +2,7 @@ PLAYWRIGHT_VERSION := $(shell node -e "console.log(require('@playwright/test/pac
 HUGO_VERSION := $(shell mise exec -- hugo version 2>/dev/null | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | sed 's/^v//' || echo "0.170.1")
 HUGO_ARCH := $(if $(filter arm64 aarch64,$(shell uname -m)),arm64,amd64)
 
-.PHONY: update-theme watch watch-published build serve test test-visual test-update-screenshots test-install
+.PHONY: update-theme watch watch-published build serve format test test-visual test-update-screenshots test-install
 DOCKER_PW_RUN = docker run --rm -v "$(PWD):/work" -w /work \
 	mcr.microsoft.com/playwright:v$(PLAYWRIGHT_VERSION)-resolute \
 	bash -c '\
@@ -32,6 +32,10 @@ build:
 ## Start Hugo server for tests (headless, no browser)
 serve:
 	mise exec -- hugo server --disableFastRender --buildDrafts --port 1313 --config hugo.yaml,hugo.test.yaml
+
+## Format and lint with Biome (fixes in place)
+format:
+	npm run format
 
 ## Run all Playwright tests
 test:

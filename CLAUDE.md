@@ -19,7 +19,13 @@ make test              # Run all Playwright tests (npm test)
 make test-visual       # Visual regression tests only
 make test-install      # Install npm deps + Chromium
 make screenshots       # Regenerate snapshot baselines (macOS locally + Linux via Docker)
+
+make format            # Biome: format + lint with fixes (npm run format)
 ```
+
+### Formatting
+
+[Biome](https://biomejs.dev/) formats and lints TS, JSON, and Markdown (config: `biome.json`; Hugo templates, `content/`, `archetypes/`, and the theme are excluded). CI runs `biome ci .` in the required `test` job. `.husky/pre-commit` runs `biome check --staged --write` and re-stages; it is invoked by the global git hook dispatcher, so there is no husky package.
 
 Hugo and Node are both managed via [mise](https://mise.jdx.dev/) (`mise.toml` pins `hugo = "0.170.1"`, `node = "26.13.1"`). All `make` targets run Hugo through `mise exec`.
 
@@ -55,6 +61,7 @@ npm run test:update    # regenerate screenshot baselines
 ## Content Conventions
 
 Posts use this front matter structure:
+
 ```yaml
 title: "Post Title"
 date: YYYY-MM-DD
@@ -62,7 +69,7 @@ description: "SEO/meta description"
 summary: "Short summary shown in post list"
 tags: ["tag1", "tag2"]
 author: "Illia Grybkov"
-draft: true  # Remove or set false to publish
+draft: true # Remove or set false to publish
 ```
 
 ## Deployment

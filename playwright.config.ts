@@ -37,9 +37,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command:
-      process.env.PW_SERVER_CMD ||
-      "make serve",
+    command: process.env.PW_SERVER_CMD || "make serve",
     url: "http://localhost:1313",
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,

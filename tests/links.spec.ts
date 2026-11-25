@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 const pages = [
   "/",
@@ -38,7 +38,7 @@ test.describe("internal links", () => {
         const response = await page.request.get(href);
         expect(
           response.ok(),
-          `Link ${href} on ${path} returned ${response.status()}`
+          `Link ${href} on ${path} returned ${response.status()}`,
         ).toBe(true);
       }
     });
@@ -52,7 +52,7 @@ test.describe("navigation menu", () => {
       const response = await page.request.get(url);
       expect(
         response.ok(),
-        `Menu item "${name}" (${url}) returned ${response.status()}`
+        `Menu item "${name}" (${url}) returned ${response.status()}`,
       ).toBe(true);
     });
   }
