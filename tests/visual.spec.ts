@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 
 type StabilizeFn = (page: Page) => Promise<void>;
 
@@ -43,14 +43,18 @@ async function stabilizePostMeta(page: Page) {
 test.beforeEach(async ({ page }) => {
   await page.route(
     (url) => url.hostname !== "localhost",
-    (route) => route.abort()
+    (route) => route.abort(),
   );
 });
 
 const pages: { name: string; path: string; stabilize?: StabilizeFn }[] = [
   { name: "home", path: "/", stabilize: stabilizeListPage },
   { name: "posts", path: "/posts/", stabilize: stabilizeListPage },
-  { name: "post-hello-world", path: "/posts/hello-world/", stabilize: stabilizePostMeta },
+  {
+    name: "post-hello-world",
+    path: "/posts/hello-world/",
+    stabilize: stabilizePostMeta,
+  },
   { name: "projects", path: "/projects/" },
   { name: "about", path: "/about/" },
   { name: "tags", path: "/tags/", stabilize: stabilizeListPage },
@@ -70,9 +74,9 @@ async function waitForPageReady(page: Page) {
             new Promise((resolve) => {
               img.onload = resolve;
               img.onerror = resolve;
-            })
-        )
-    )
+            }),
+        ),
+    ),
   );
 }
 

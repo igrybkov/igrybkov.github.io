@@ -5,10 +5,13 @@
     "test:visual": "playwright test tests/visual.spec.ts",
     "test:a11y": "playwright test tests/accessibility.spec.ts",
     "test:links": "playwright test tests/links.spec.ts",
-    "test:update": "playwright test --update-snapshots"
+    "test:update": "playwright test --update-snapshots",
+    "format": "biome check --write .",
+    "lint": "biome ci ."
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.1",
+    "@biomejs/biome": "2.6.9",
     "@playwright/test": "^1.65.1",
     "@types/node": "^26.6.10"
   }

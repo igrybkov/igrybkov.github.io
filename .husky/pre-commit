@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+# Run by the global git hook dispatcher (no husky package needed).
+# Format and fix staged files, then re-stage them.
+npx biome check --staged --write --no-errors-on-unmatched || exit 1
+git update-index --again
