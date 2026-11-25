@@ -14,9 +14,11 @@ permissions:
   pages: write
   id-token: write
 
+# One run per ref. PR runs cancel older runs of the same PR, but they
+# never touch main's queue, so a PR can't bump a pending deploy.
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 defaults:
   run:
@@ -111,6 +113,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-26.04
     needs: build
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
