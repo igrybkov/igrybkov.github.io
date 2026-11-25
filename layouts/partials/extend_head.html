@@ -1,3 +1,10 @@
+{{- /* Cloudflare Web Analytics. The apex is DNS-only, so Cloudflare cannot
+inject it. Production builds only: `hugo server` and the Playwright runs send
+nothing. The token is public and is owned by home-network's
+dns_public_cloudflare unit (output web_analytics_grybkov_com_token). */ -}}
+{{- with site.Params.cloudflareWebAnalyticsToken }}{{ if hugo.IsProduction }}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ . }}"}'></script>
+{{- end }}{{ end }}
 <link rel="icon" type="image/svg+xml" href="{{ "icon.svg" | absURL }}">
 
 <style>
