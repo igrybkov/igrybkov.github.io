@@ -1,10 +1,10 @@
-PLAYWRIGHT_VERSION := $(shell node -e "console.log(require('@playwright/test/package.json').version)" 2>/dev/null || echo "1.58.2")
-HUGO_VERSION := $(shell mise exec -- hugo version 2>/dev/null | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | sed 's/^v//' || echo "0.155.3")
+PLAYWRIGHT_VERSION := $(shell node -e "console.log(require('@playwright/test/package.json').version)" 2>/dev/null || echo "1.65.1")
+HUGO_VERSION := $(shell mise exec -- hugo version 2>/dev/null | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1 | sed 's/^v//' || echo "0.170.1")
 HUGO_ARCH := $(if $(filter arm64 aarch64,$(shell uname -m)),arm64,amd64)
 
 .PHONY: update-theme watch watch-published build serve test test-visual test-update-screenshots test-install
 DOCKER_PW_RUN = docker run --rm -v "$(PWD):/work" -w /work \
-	mcr.microsoft.com/playwright:v$(PLAYWRIGHT_VERSION)-noble \
+	mcr.microsoft.com/playwright:v$(PLAYWRIGHT_VERSION)-resolute \
 	bash -c '\
 		curl -sL "https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/hugo_extended_$(HUGO_VERSION)_linux-$(HUGO_ARCH).tar.gz" \
 			| tar xz -C /usr/local/bin hugo \

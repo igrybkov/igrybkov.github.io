@@ -38,6 +38,15 @@ async function stabilizePostMeta(page: Page) {
   });
 }
 
+// Block third-party requests (giscus comments, etc.) so screenshots
+// depend only on the site itself, not on live external content.
+test.beforeEach(async ({ page }) => {
+  await page.route(
+    (url) => url.hostname !== "localhost",
+    (route) => route.abort()
+  );
+});
+
 const pages: { name: string; path: string; stabilize?: StabilizeFn }[] = [
   { name: "home", path: "/", stabilize: stabilizeListPage },
   { name: "posts", path: "/posts/", stabilize: stabilizeListPage },
