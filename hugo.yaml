@@ -8,6 +8,7 @@ pagination:
 
 params:
   env: production
+  mainSections: ["posts"]
   description: "Staff Software Engineer at Adobe. Writing about developer experience, lessons learned, and things I find interesting."
   author: Illia Grybkov
   cloudflareWebAnalyticsToken: e6bb66d5b70d4aa89fb910ed748b99cb
